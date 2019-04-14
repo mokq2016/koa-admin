@@ -24,6 +24,15 @@ var _select = function() {
 
     })
 }
+var _selectByName = function(name){
+    var sql = "SELECT * FROM user WHERE userName = '"+name+"'";
+    return new Promise((resolve, reject) => {
+        mysql.query(sql, [], function(results, fields) {
+            resolve(results, fields)
+        })
+
+    })
+}
 var _delete = function(userId) {
     var sql = "DELETE FROM user WHERE userId =" + userId
     return new Promise((resolve, reject) => {
@@ -36,5 +45,6 @@ var _delete = function(userId) {
 module.exports = {
     insert: _createUser,
     select: _select,
-    delete:_delete
+    delete:_delete,
+    selectByName:_selectByName
 }
