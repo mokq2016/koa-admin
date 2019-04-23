@@ -13,25 +13,12 @@ const users = require('./routes/users')
 
 const Store = require("./store/store.js");
 
-//session
+session
 app.use(session({
   store:new Store()
 }))
-// app.use(views(__dirname + '/views', {
-//   extension: 'pug'
-// }))
-//登陆拦截
-app.use(async (ctx, next) => {
 
-  if(!ctx.cookies.get('koa:sess') && ctx.path !== '/users/login'){
-    console.log(ctx.cookies.get('koa:sess'),ctx.path)
-    await ctx.render('index',{
-      title:'请登录'
-    })
-    return;
-  }
-  next()
-})
+
 // error handler
 onerror(app)
 
@@ -43,16 +30,27 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
+app.use(views(__dirname + '/views', {
+  extension: 'pug'
+}))
+//登陆拦截
+app.use(async (ctx, next) => {
 
+  if(!ctx.cookies.get('koa:sess') && ctx.path !== '/users/login'){
 
+    await ctx.render('index',{
+      title:'请登录'
+    })
+    return;
+  }
+  next()
+})
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
-
-  ctx.session.user = JSON.stringify({ userName: '123', })
-  console.log(ctx.session)
+  
   await next()
-
+  console.log(ctx.session)
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
