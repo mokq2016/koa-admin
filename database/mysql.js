@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var databaseConfig = {
-	host     : '118.25.190.208',
+	host     : '47.107.225.70',
   user     : 'root',
-  port		:'13306',
-  password : '123456',
+  port		:'3306',
+  password : '123456qW',
   database : 'mall_schema'
 }
 //connection.connect();

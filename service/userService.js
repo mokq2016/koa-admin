@@ -3,9 +3,10 @@ var moment = require('moment');
 var Result = require('../util/result.js')
 var addUser = async function(userObj){
 	var result = await user.insert({
-		userName:userObj.userName,
+    userName:userObj.userName,
+    password:userObj.password,
 		createTime:moment().format('YYYY-MM-DD hh:mm:ss'),
-		address:'深圳'
+		address:''
 	})
 	return result.length == 0 ? false:true
 }
@@ -21,7 +22,6 @@ var deleteUserById = function(id){
 }
 
 var userLogin = async function(obj){
-	console.log(obj)
 	var result = await user.selectByName(obj.userName);
 	if(result.length == 0){
 		if(addUser(obj)){

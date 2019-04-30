@@ -13,7 +13,6 @@ const users = require('./routes/users')
 
 const Store = require("./store/store.js");
 
-session
 app.use(session({
   store:new Store()
 }))
@@ -43,14 +42,12 @@ app.use(async (ctx, next) => {
     })
     return;
   }
-  next()
+  await next()
 })
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
-  
+  const start = new Date() 
   await next()
-  console.log(ctx.session)
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })

@@ -2,9 +2,10 @@ var mysql = require('../database/mysql.js')
 
 
 var _createUser = function(user) {
-    var sql = "INSERT INTO user(userId,userName,createTime,address) VALUES(0,?,?,?) ";
+    var sql = "INSERT INTO user(userId,userName,password,createTime,address) VALUES(0,?,?,?,?) ";
     var addParams = [];
     addParams.push(user.userName)
+    addParams.push(user.password)
     addParams.push(user.createTime)
     addParams.push(user.address)
 
