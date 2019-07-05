@@ -5,11 +5,7 @@ router.prefix('/users')
 router.post('/login', async (ctx, next)=> {
     let param = ctx.request.body;
     let result = await userService.userLogin(param);
-    if (result.success) {
-        console.log(ctx.status)
-        //ctx.session.user = JSON.stringify(result.data[0])
-        ctx.body = '1244'
-    }
+    ctx.body = result
     
     
 })

@@ -25,12 +25,19 @@ var userLogin = async function(obj){
 	var result = await user.selectByName(obj.userName);
 	if(result.length == 0){
 		if(addUser(obj)){
-			return new Result(true,result);
+			return new Result(true,result[0]);
 		}else{
 			return new Result(false,null,'登录失败');
 		}
 	}else{
-		return new Result(true,result);
+    
+    if(result[0].password != obj.password){
+      console.log('密码错误')
+      return new Result(false,null,'密码错误')
+    }else{
+      return new Result(true,result[0]);
+    }
+		
 	}
 }
 module.exports = {
