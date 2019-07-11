@@ -10,10 +10,9 @@ var addUser = async function(userObj){
 	})
 	return result.length == 0 ? false:true
 }
-var findUsers = function(){
-	user.select().then((results)=>{
-		console.log(results)
-	})
+var findUsers = async function(){
+	 var result = await user.select()
+	return new Result(true,result);
 }
 var deleteUserById = function(id){
 	user.delete(id).then((results)=>{

@@ -33,17 +33,17 @@ app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
 //登陆拦截
-app.use(async (ctx, next) => {
+// app.use(async (ctx, next) => {
 
-  if(!ctx.cookies.get('koa:sess') && ctx.path !== '/users/login'){
+//   if(!ctx.cookies.get('koa:sess') && ctx.path !== '/users/login'){
 
-    await ctx.render('index',{
-      title:'请登录'
-    })
-    return;
-  }
-  await next()
-})
+//     await ctx.render('index',{
+//       title:'请登录'
+//     })
+//     return;
+//   }
+//   await next()
+// })
 // logger
 app.use(async (ctx, next) => {
   const start = new Date() 
